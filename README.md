@@ -6,6 +6,9 @@ The following programs need to be in the same **<working_directory>** as the ps1
 - ytarchive.exe
 - ffmpeg.exe
 
+## File structure example:
+![files](/images/files.png)
+
 # How to install dependencies
 ## ytarchive.exe
  - download [ytarchive.exe](https://github.com/Kethsar/ytarchive/releases)
