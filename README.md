@@ -23,7 +23,7 @@ The following programs need to be in the same **<working_directory>** as the ps1
 
 # How to use
 ## Start the script by choosing one of the following: 
- - Double-click `start.bat`
+ - Double-click `hololive-en.bat`
  - or Right-clicking `hololive-en.ps1` and selecting `Run with Powershell`
 ## Select a channel and wait for stream to start
 ![select_channel](/images/example.png)

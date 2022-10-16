@@ -32,7 +32,7 @@ $channelList.add("Hakos Baelz", @("Hakos Baelz", "UCgmPnx-EEeOrZSg5Tiw7ZRQ"))
 # loop through all 
 $option = 1
 
-Write-Host ""
+Write-Host '0. Custom URL'
 $channelList.keys | ForEach-Object {
     $optionMsg = '{0}. {1}' -f $option, $_
     $option++
@@ -41,13 +41,20 @@ $channelList.keys | ForEach-Object {
 
 Write-Host ""
 $choice = Read-Host -Prompt "Select option"
-$channelName = $channelList[$choice-1].get(0)
-$channelId = $channelList[$choice-1].get(1)
 
-$nameFormat = "'unwatched/[$channelName] %(upload_date)s %(title)s (%(id)s)'"
+if ($choice -eq 0) {
+    # grab channel name from the youtube metadata
+    $url = Read-Host -Prompt "Enter youtube url" 
+    $nameFormat = "'unwatched/[%(channel)s] %(upload_date)s %(title)s (%(id)s)'"
+} else {
+    $channelName = $channelList[$choice-1].get(0)
+    $channelId = $channelList[$choice-1].get(1)
 
-# format https://www.youtube.com/channel/<channel_id>/live
-$url = "https://www.youtube.com/channel/{0}/live" -f $channelId
+    $nameFormat = "'unwatched/[$channelName] %(upload_date)s %(title)s (%(id)s)'"
+
+    # format https://www.youtube.com/channel/<channel_id>/live
+    $url = "https://www.youtube.com/channel/{0}/live" -f $channelId
+}
 
 # check for cookie file
 if (Test-Path -Path $cookie -PathType Leaf) {
