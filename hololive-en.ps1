@@ -29,10 +29,12 @@ $channelList.add("Ouro Kronii", @("Ouro Kronii", "UCmbs8T6MWqUHP1tIQvSgKrg"))
 $channelList.add("Nanashi Mumei", @("Nanashi Mumei", "UC3n5uGu18FoCy23ggWWp8tA"))
 $channelList.add("Hakos Baelz", @("Hakos Baelz", "UCgmPnx-EEeOrZSg5Tiw7ZRQ"))
 
-# loop through all 
-$option = 1
-
+# print choices
+# 0 is custom
+# 1+ is based on the channelList
 Write-Host '0. Custom URL'
+
+$option = 1
 $channelList.keys | ForEach-Object {
     $optionMsg = '{0}. {1}' -f $option, $_
     $option++
@@ -43,9 +45,10 @@ Write-Host ""
 $choice = Read-Host -Prompt "Select option"
 
 if ($choice -eq 0) {
+    $WAIT_FOR_NEXT_STREAM = $False
+    $nameFormat = "'unwatched/[%(channel)s] %(upload_date)s %(title)s (%(id)s)'"
     # grab channel name from the youtube metadata
     $url = Read-Host -Prompt "Enter youtube url" 
-    $nameFormat = "'unwatched/[%(channel)s] %(upload_date)s %(title)s (%(id)s)'"
 } else {
     $channelName = $channelList[$choice-1].get(0)
     $channelId = $channelList[$choice-1].get(1)
